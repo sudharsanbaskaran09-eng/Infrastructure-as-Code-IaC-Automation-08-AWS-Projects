@@ -1,9 +1,10 @@
-# Project: Automated AWS Resource Tagging & Compliance Enforcement
+# Project: Automated EC2 OS Patching using AWS Systems Manager (SSM)
 
-This project demonstrates how to **automate AWS resource tagging and enforce compliance** using **AWS native governance services**.  
-The solution ensures that AWS resources always follow mandatory tagging standards without manual intervention.
+This project demonstrates how to automate operating system patch management for Amazon EC2 instances using AWS Systems Manager Patch Manager.
 
-The entire workflow is **event-driven and serverless**, designed to meet **industry-level cloud governance and cost management requirements**.
+The solution ensures that EC2 instances remain secure, compliant, and up-to-date without manual SSH-based patching.
+
+The entire workflow is managed, scalable, and production-ready, aligned with industry-level cloud security and infrastructure governance standards.
 
 ---
 
@@ -11,77 +12,107 @@ The entire workflow is **event-driven and serverless**, designed to meet **indus
 
 The solution provisions and integrates the following components:
 
-- **AWS Config** to continuously evaluate AWS resources for required tags
-- A **custom AWS Config rule** backed by AWS Lambda
-- **AWS Lambda (Python 3.12)** for compliance evaluation
-- **Amazon EventBridge** to capture NON_COMPLIANT events
-- A remediation **AWS Lambda function** to automatically apply missing tags
-- **AWS IAM roles and policies** for secure service permissions
-- **Amazon CloudWatch Logs** for monitoring and debugging
+- Amazon EC2 (Amazon Linux 2023) as the managed server
+- AWS Systems Manager (SSM) for centralized instance management
+- SSM Agent for secure remote communication
+- AWS-managed Patch Baseline for approved patch policies
+- Patch Scan & Install operations using Patch Manager
+- Compliance Reporting Dashboard for visibility
+- AWS IAM role (AmazonSSMManagedInstanceCore) for secure service permissions
 
-All resources are managed using AWS managed services, ensuring scalability, reliability, and minimal operational overhead.
+All operations are performed using AWS managed services, ensuring:
 
-This architecture follows AWS best practices for **governance, automation, and compliance**.
+- No direct SSH dependency
+- Secure remote management
+- Scalable patch lifecycle automation
+- Centralized compliance tracking
+
+This architecture follows AWS best practices for security hardening, automation, and operational excellence.
 
 ---
 
 ## Features
 
-- Automated detection of missing or incorrect AWS resource tags
-- Event-driven remediation using Amazon EventBridge
-- Fully serverless and managed architecture
-- Continuous compliance monitoring
-- No manual tagging or remediation required
-- Scalable across multiple AWS services and resources
+- Automated patch scanning for EC2 instances
+- Patch installation without manual intervention
+- Centralized compliance visibility
+- No SSH-based maintenance required
+- Secure IAM-based instance management
+- Enterprise-style patch lifecycle workflow
+- Scalable for multiple EC2 instances
 
 ---
 
 ## AWS Services Used
 
-- AWS Config
-- AWS Lambda (Python 3.12)
-- Amazon EventBridge
+- AWS Systems Manager (Patch Manager)
+- Amazon EC2
 - AWS IAM
-- Amazon CloudWatch
-- Amazon EC2 (for validation)
+- SSM Agent
+- Patch Baselines
+- Compliance Reporting
 
 ---
 
 ## Workflow
 
-1. AWS resources are created or modified
-2. AWS Config evaluates resources using a custom rule
-3. Resources without mandatory tags are marked **NON_COMPLIANT**
-4. AWS Config emits a compliance change event
-5. Amazon EventBridge captures the event
-6. Remediation Lambda function is triggered
-7. Missing tags are automatically applied
-8. Resource transitions back to **COMPLIANT** state
+1. EC2 instance is launched with SSM IAM role attached  
+2. Instance registers automatically as a Managed Node in Systems Manager  
+3. AWS-managed Patch Baseline defines approved updates  
+4. Patch Scan is executed to detect missing updates  
+5. Patch Install operation applies required updates  
+6. Compliance Reporting verifies patch status  
+7. Instance reaches COMPLIANT state  
 
 ---
 
 ## Testing & Validation
 
-- Created EC2 instances without required tags
-- Verified **NON_COMPLIANT** status in AWS Config
-- Confirmed EventBridge rule execution
-- Checked Lambda execution logs in CloudWatch
-- Validated automatic tag application
-- Verified compliance status change to **COMPLIANT**
+- Verified EC2 registration in Systems Manager
+- Executed Patch Scan operation successfully
+- Executed Patch Install operation
+- Confirmed zero missing patches
+- Validated compliance status as COMPLIANT
+- Confirmed no failed patch installations
+
+All screenshots and proof of execution are available in this repository.
 
 ---
 
 ## Key Learnings
 
-- Implementing cloud governance using AWS Config
-- Writing custom compliance rules with Lambda
-- Event-driven automation using Amazon EventBridge
-- Automated remediation strategies
-- AWS tagging best practices for cost and operations
-- Designing production-ready AWS governance solutions
+- Centralized patch management using AWS Systems Manager
+- Automating OS updates without SSH access
+- Understanding patch baselines and compliance reporting
+- Implementing secure IAM-based remote management
+- Designing production-ready patch lifecycle automation
+- Improving infrastructure security posture
+
+---
+
+## Security Impact
+
+Automated patching reduces:
+
+- Vulnerability exposure window
+- Human error in manual updates
+- Configuration drift
+- Operational overhead
+
+It improves:
+
+- Compliance readiness
+- Infrastructure reliability
+- Security governance maturity
 
 ---
 
 ## Status
 
-**Completed ✅**
+Completed ✅
+
+Compliance Status: 100%  
+Missing Patches: 0  
+Failed Installations: 0  
+Environment: Amazon Linux 2023  
+Management: AWS Systems Manager Patch Manager  
