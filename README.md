@@ -9,15 +9,15 @@ These projects follow real-world DevOps and cloud engineering practices, emphasi
 
 ## Projects Covered
 
-1. Terraform for AWS Infrastructure  
-2. CloudFormation Infrastructure Deployment  
-3. AWS CDK Deployment  
-4. Automated AWS Resource Tagging  
-5. AWS SSM Automated Patching  
-6. Automated Cost Optimization using AWS Lambda  
-7a. Self-Healing EC2 Recovery using CloudWatch
-7b. Self-Healing Infrastructure using Terraform + Auto Scaling  
-8. Automated EC2 Scaling Based on Load  
+ 1. Terraform for AWS Infrastructure  
+ 2. CloudFormation Infrastructure Deployment  
+ 3. AWS CDK Deployment  
+ 4. Automated AWS Resource Tagging  
+ 5. AWS SSM Automated Patching  
+ 6. Automated Cost Optimization using AWS Lambda
+ 7a. Self-Healing EC2 Recovery using CloudWatch
+ 7b. Self-Healing Infrastructure using Terraform + Auto Scaling  
+ 8. Automated EC2 Scaling Based on Load  
 
 ---
 
