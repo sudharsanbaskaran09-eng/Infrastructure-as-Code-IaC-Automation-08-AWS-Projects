@@ -15,7 +15,8 @@ These projects follow real-world DevOps and cloud engineering practices, emphasi
 4. Automated AWS Resource Tagging  
 5. AWS SSM Automated Patching  
 6. Automated Cost Optimization using AWS Lambda  
-7. Self-Healing Infrastructure  
+7a. Self-Healing EC2 Recovery using CloudWatch
+7b. Self-Healing Infrastructure using Terraform + Auto Scaling  
 8. Automated EC2 Scaling Based on Load  
 
 ---
