@@ -1,211 +1,86 @@
 # Project: Self-Healing Infrastructure using Terraform & AWS Auto Scaling
 
-This project demonstrates how to build a **self-healing cloud infrastructure** using **Terraform and AWS Auto Scaling**.  
-The infrastructure automatically replaces unhealthy EC2 instances, ensuring **high availability and fault tolerance** without manual intervention.
+This project demonstrates how to build a **self-healing cloud infrastructure** using **Terraform and AWS native scaling services**.
 
-The entire environment is provisioned using **Infrastructure as Code (IaC)**, making the deployment reproducible, scalable, and production-ready.
+The infrastructure automatically detects unhealthy EC2 instances and **replaces them with new instances without manual intervention**, ensuring high availability and reliability.
+
+The entire infrastructure is deployed using **Infrastructure as Code (IaC)**, making it fully automated, repeatable, and production-ready.
 
 ---
 
-# Architecture Overview
+## Architecture Overview
 
-The infrastructure consists of the following components:
+The solution provisions and integrates the following components:
 
-- **Terraform** for Infrastructure as Code
+- **Terraform** to define and provision infrastructure as code
 - **AWS EC2 Launch Template** to define instance configuration
-- **AWS Auto Scaling Group (ASG)** to maintain instance health
-- **AWS EC2 Instances** that automatically recover when failures occur
+- **AWS Auto Scaling Group** to automatically maintain instance health
+- **Amazon EC2 instances** for compute resources
+- **AWS VPC default subnet** for network placement
 
-If an EC2 instance fails a health check, the Auto Scaling Group **automatically terminates the unhealthy instance and launches a new one**, maintaining the desired capacity.
+The Auto Scaling Group continuously monitors instance health.  
+If an EC2 instance fails a health check or is terminated, the Auto Scaling Group **automatically launches a replacement instance**.
 
----
-
-# Architecture Flow
-
-Launch Template  
-↓  
-Auto Scaling Group  
-↓  
-EC2 Instance Running  
-↓  
-Health Check Monitoring  
-↓  
-Instance Failure Detected  
-↓  
-Auto Scaling Terminates Instance  
-↓  
-New EC2 Instance Automatically Created
+This architecture follows AWS best practices for **high availability, resilience, and infrastructure automation**.
 
 ---
 
-# Features
+## Features
 
-- Infrastructure fully provisioned using Terraform
+- Fully automated infrastructure provisioning using Terraform
 - Self-healing EC2 infrastructure
 - Automatic instance replacement on failure
-- Highly available architecture design
-- Scalable cloud infrastructure
 - Infrastructure lifecycle management
+- Highly available architecture design
+- Production-style cloud infrastructure deployment
 
 ---
 
-# AWS Services Used
+## AWS Services Used
 
-- Amazon EC2
-- Amazon EC2 Launch Templates
-- Amazon EC2 Auto Scaling
-- Amazon VPC (default)
-
----
-
-# Project Structure
-
-```
-terraform-self-healing-asg/
-│
-├── provider.tf
-├── main.tf
-├── variables.tf
-├── outputs.tf
-│
-├── SCREENSHOTS/
-│
-└── ARCHITECTURE.png
-```
+- AWS EC2
+- AWS EC2 Launch Templates
+- AWS Auto Scaling
+- AWS VPC
 
 ---
 
-# Terraform Configuration
+## Workflow
 
-### Provider Configuration
-Defines AWS as the cloud provider and the region where resources will be deployed.
-
-### Launch Template
-Defines the EC2 configuration including:
-
-- AMI ID
-- Instance Type
-- Tags
-- Instance configuration
-
-### Auto Scaling Group
-Maintains a desired number of EC2 instances and performs automatic healing.
-
-Configuration includes:
-
-- Minimum capacity
-- Maximum capacity
-- Desired capacity
-- Health check type
-- Launch template reference
+1. Terraform defines the infrastructure configuration
+2. A Launch Template is created for EC2 configuration
+3. An Auto Scaling Group is deployed using the launch template
+4. The Auto Scaling Group launches an EC2 instance
+5. Health checks continuously monitor the instance
+6. If the instance fails or is terminated, Auto Scaling detects the failure
+7. Auto Scaling automatically launches a new EC2 instance
+8. The infrastructure maintains the desired capacity automatically
 
 ---
 
-# Deployment Steps
+## Testing & Validation
 
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/terraform-self-healing-asg.git
-cd terraform-self-healing-asg
-```
-
----
-
-### 2️⃣ Initialize Terraform
-
-```bash
-terraform init
-```
-
-This downloads the required Terraform providers.
+- Deployed infrastructure using Terraform
+- Verified Launch Template creation
+- Verified Auto Scaling Group deployment
+- Observed EC2 instance running under Auto Scaling
+- Simulated failure by terminating the EC2 instance
+- Verified Auto Scaling automatically launched a new replacement instance
+- Confirmed self-healing behavior of the infrastructure
 
 ---
 
-### 3️⃣ Preview Infrastructure
+## Key Learnings
 
-```bash
-terraform plan
-```
-
-Shows what resources will be created.
-
----
-
-### 4️⃣ Deploy Infrastructure
-
-```bash
-terraform apply
-```
-
-Type:
-
-```
-yes
-```
-
-Terraform will create:
-
-- Launch Template
-- Auto Scaling Group
-- EC2 Instance
-
----
-
-# Testing Self-Healing
-
-To test the self-healing capability:
-
-1. Go to AWS EC2 Console
-2. Terminate the running EC2 instance
-3. Navigate to Auto Scaling Group
-4. Observe that a **new EC2 instance is automatically created**
-
-This demonstrates **self-healing infrastructure behavior**.
-
----
-
-# Infrastructure Cleanup
-
-To delete all resources created by Terraform:
-
-```bash
-terraform destroy
-```
-
-Type:
-
-```
-yes
-```
-
-This prevents unnecessary AWS costs.
-
----
-
-# Key Learnings
-
-- Infrastructure as Code with Terraform
+- Infrastructure as Code using Terraform
+- Designing self-healing infrastructure
 - Launch Templates for EC2 configuration
 - Auto Scaling Groups for resilience
-- Self-healing cloud infrastructure
-- Terraform workflow (init → plan → apply → destroy)
+- Health checks and automatic instance recovery
+- Terraform infrastructure lifecycle (init → plan → apply → destroy)
 
 ---
 
-# Real World Use Case
+## Status
 
-Self-healing infrastructure is widely used in production environments to:
-
-- Maintain application availability
-- Reduce downtime
-- Automatically recover from failures
-- Ensure scalable infrastructure
-
-This approach is commonly used by **DevOps and SRE teams** in large-scale cloud environments.
-
----
-
-# Status
-
-Project Completed
+**Completed ✅**
