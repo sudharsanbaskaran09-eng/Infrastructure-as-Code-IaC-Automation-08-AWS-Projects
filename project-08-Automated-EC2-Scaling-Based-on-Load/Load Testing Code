@@ -1,0 +1,2 @@
+sudo yum install stress -y
+stress --cpu 2 --timeout 300
