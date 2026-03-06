@@ -1,0 +1,8 @@
+yum update -y
+yum install -y httpd
+
+systemctl start httpd
+systemctl enable httpd
+
+echo "<h1>Auto Scaling Web Server</h1>" > /var/www/html/index.html
+echo "<h2>Instance ID: $(hostname)</h2>" >> /var/www/html/index.html
