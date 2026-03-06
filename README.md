@@ -56,4 +56,4 @@ To gain strong hands-on experience in automating AWS infrastructure, reducing ma
 
 ## Status
 
-In Progress 🚧
+COMPLETED
